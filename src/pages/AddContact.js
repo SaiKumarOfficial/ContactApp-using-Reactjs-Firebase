@@ -1,4 +1,4 @@
-import React,{ useState,useContext, useEffect} from "react";
+import React,{ useState, useContext, useEffect} from "react";
 import firebase from "firebase/compat/app"
 
 import {
@@ -24,7 +24,7 @@ import { v4 } from "uuid";
 import { ContactContext } from "../context/Context";
 import { CONTACT_TO_UPDATE } from "../context/action.types";
 
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 import {toast} from "react-toastify"
 
@@ -34,8 +34,8 @@ const AddContact = () => {
 
   const { contactToUpdate, contactToUpdateKey } = state;
 
-  // history hooks from react router dom to send to different page
-  const history = useHistory();
+  // navigate hooks from react router dom to send to different page
+  const navigate = useNavigate();
 
   // simple state of all component
   const [name, setName] = useState("");
@@ -84,11 +84,11 @@ const AddContact = () => {
 
                 switch (snapshot.state) {
                     case firebase.storage.TaskState.PAUSED:
-                        setIsUploading(fals)
+                        setIsUploading(false)
                         console.log("Uploading is paused")
                         break;
                     case firebase.storage.TaskState.RUNNING:
-                        setIsUploading(fals)
+                        setIsUploading(false)
                         console.log("Uploading is progress..")
                         break;
                 }
@@ -149,7 +149,7 @@ const handleSubmit = e => {
     toast("Success", { type: "success" });
     // isUpdate wll be true when the user came to update the contact
     // when their is contact then updating and when no contact to update then adding contact
-    //TODO: set isUpdate value
+    //set isUpdate value
 
     // to handle the bug when the user visit again to add contact directly by visiting the link
     dispatch({
@@ -160,7 +160,7 @@ const handleSubmit = e => {
 
     // after adding/updating contact then sending to the contacts
     // TODO :- also sending when their is any errors
-    history.push("/");
+    navigate("/");
   };
 
   // return the spinner when the image has been added in the storage
