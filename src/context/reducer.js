@@ -7,7 +7,7 @@ import {
 
 
 export default (state, action) => {
-    switch (action, type){
+    switch (action.type){
         case SET_CONTACT:
             return action.payload == null ? {...state, contacts:[]}: {...state, contacts: action.payload}
         
