@@ -5,3 +5,7 @@ export const imageConfig = {
     maxHeight: 600,
     autoRotate: true
 }
+
+export const firebaseConfig = {
+    //Provide api key from Firebase
+};
